@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import firebase from 'firebase';
 
 class LoginScreen extends React.Component {
   state = {
@@ -8,6 +9,14 @@ class LoginScreen extends React.Component {
   }
 
   handleSubmit() {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then((user) => {
+        console.log(user);
+        this.props.navigation.navigate('Home')
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   render() {
@@ -20,7 +29,7 @@ class LoginScreen extends React.Component {
           style={styles.input}
           value={this.state.email}
           onChangeText={(text) => { this.setState({ email: text }); }}
-          autoCapitaliza="none"
+          autoCapitalize="none"
           autoCorrect={false}
           placeholder="Email Address"
         />
@@ -28,7 +37,7 @@ class LoginScreen extends React.Component {
           style={styles.input}
           value={this.state.password}
           onChangeText={(text) => { this.setState({ password: text }); }}
-          autoCapitaliza="none"
+          autoCapitalize="none"
           autoCorrect={false}
           placeholder="Password"
           secureTextEntry
