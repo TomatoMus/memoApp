@@ -2,6 +2,7 @@ node_modules/**/*
 .expo/*
 npm-debug.*
 assets
+env.json
 
 # Xcode
 !**/*.xcodeproj
