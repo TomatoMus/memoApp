@@ -20,7 +20,7 @@ export default class MemoListScreen extends React.Component {
         const tempList = [];
 
         querySnapshot.forEach((doc) => {
-          tempList.push(doc.data());
+          tempList.push({ ...doc.data(), key: doc.id });
         });
         this.setState({ memoList: tempList });
       })
